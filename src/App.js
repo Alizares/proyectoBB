@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Button, Container,  Modal, ModalBody, ModalHeader, FormGroup, ModalFooter } from 'reactstrap';
 const data =[];
 
-class App extends Component {
+class CRUDDoc extends Component {
   state={
     data:data,
     form:{
       id:'',
       nombre:'',
-      apellidos:'',
-      ci:'',
-      cargahoraria:''
+      sigla:'',
+      cargahoraria:'',
+      horassemana:''
     },
     modalInsertar: false,
     modalEditar: false,
@@ -57,9 +56,9 @@ class App extends Component {
     lista.map((registro)=>{
       if(dato.id == registro.id){
         lista[contador].nombre = dato.nombre;
-        lista[contador].apellidos = dato.apellidos;
-        lista[contador].ci = dato.ci;
+        lista[contador].sigla = dato.sigla;
         lista[contador].cargahoraria = dato.cargahoraria;
+        lista[contador].horassemana = dato.horassemana;
       }
       contador++;
     });
@@ -67,7 +66,7 @@ class App extends Component {
   }
 
   eliminar = (dato)=>{
-    var opcion = window.confirm("Esta seguro que desea eliminar a "+dato.nombre+" "+ dato.apellidos);
+    var opcion = window.confirm("Esta seguro que desea eliminar a "+dato.nombre+" "+ dato.sigla);
     if(opcion == true){
       var contador = 0;
       var lista = this.state.data;
@@ -86,16 +85,16 @@ class App extends Component {
     <>
     <Container>
     <br/>
-    <Button color = "success" onClick={()=>this.mostrarModalInsertar()}>Agregar Nuevo Docente</Button>
+    <Button color = "success" onClick={()=>this.mostrarModalInsertar()}>Agregar Nueva Materia</Button>
     <br/><br/>
 
     <Table>
       <thead><tr>
       <th>ID</th>
       <th>Nombre</th>
-      <th>Apellidos</th>
-      <th>CI</th>
+      <th>Sigla</th>
       <th>Carga Horaria</th>
+      <th>Horas por Semana</th>
       </tr></thead>
       
       <tbody>
@@ -103,9 +102,9 @@ class App extends Component {
           <tr>
             <td>{dato.id}</td>
             <td>{dato.nombre}</td>
-            <td>{dato.apellidos}</td>
-            <td>{dato.ci}</td>
+            <td>{dato.sigla}</td>
             <td>{dato.cargahoraria}</td>
+            <td>{dato.horassemana}</td>
             <td>
               <Button color="success" onClick={()=>this.mostrarModalEditar(dato)}>Editar</Button>
               {" "}
@@ -134,18 +133,18 @@ class App extends Component {
         </FormGroup>
 
         <FormGroup>
-          <label>Apellidos:</label>
-          <input className="form-control" name="apellidos" type="text" onChange={this.handlerChange}/>
-        </FormGroup>
-
-        <FormGroup>
-          <label>CI:</label>
-          <input className="form-control" name="ci" type="text" onChange={this.handlerChange}/>
+          <label>Sigla:</label>
+          <input className="form-control" name="sigla" type="text" onChange={this.handlerChange}/>
         </FormGroup>
 
         <FormGroup>
           <label>Carga Horaria:</label>
           <input className="form-control" name="cargahoraria" type="number" onChange={this.handlerChange}/>
+        </FormGroup>
+
+        <FormGroup>
+          <label>Horas por Semana:</label>
+          <input className="form-control" name="horassemana" type="number" onChange={this.handlerChange}/>
         </FormGroup>
       </ModalBody>
 
@@ -173,18 +172,18 @@ class App extends Component {
         </FormGroup>
 
         <FormGroup>
-          <label>Apellidos:</label>
-          <input className="form-control" name="apellidos" type="text" onChange={this.handlerChange} value={this.state.form.apellidos}/>
-        </FormGroup>
-
-        <FormGroup>
-          <label>CI:</label>
-          <input className="form-control" name="ci" type="text" onChange={this.handlerChange} value={this.state.form.ci}/>
+          <label>Sigla:</label>
+          <input className="form-control" name="sigla" type="text" onChange={this.handlerChange} value={this.state.form.sigla}/>
         </FormGroup>
 
         <FormGroup>
           <label>Carga Horaria:</label>
           <input className="form-control" name="cargahoraria" type="number" onChange={this.handlerChange} value={this.state.form.cargahoraria}/>
+        </FormGroup>
+
+        <FormGroup>
+          <label>Horas por Semana:</label>
+          <input className="form-control" name="horassemana" type="number" onChange={this.handlerChange} value={this.state.form.horassemana}/>
         </FormGroup>
       </ModalBody>
 
@@ -196,4 +195,4 @@ class App extends Component {
     </>)
   }
 }
-export default App;
+export default CRUDDoc;
