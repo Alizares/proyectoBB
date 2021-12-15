@@ -3,15 +3,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Button, Container,  Modal, ModalBody, ModalHeader, FormGroup, ModalFooter } from 'reactstrap';
 const data =[];
 
-class CRUDDoc extends Component {
+class Ambiente extends Component {
   state={
     data:data,
     form:{
       id:'',
-      nombre:'',
-      sigla:'',
-      cargahoraria:'',
-      horassemana:''
+      numeroambiente:'',
+      numeropiso:'',
+      capacidad:''
     },
     modalInsertar: false,
     modalEditar: false,
@@ -55,10 +54,9 @@ class CRUDDoc extends Component {
     var lista = this.state.data;
     lista.map((registro)=>{
       if(dato.id == registro.id){
-        lista[contador].nombre = dato.nombre;
-        lista[contador].sigla = dato.sigla;
-        lista[contador].cargahoraria = dato.cargahoraria;
-        lista[contador].horassemana = dato.horassemana;
+        lista[contador].numeroambiente = dato.numeroambiente;
+        lista[contador].numeropiso = dato.numeropiso;
+        lista[contador].capacidad = dato.capacidad;
       }
       contador++;
     });
@@ -66,7 +64,7 @@ class CRUDDoc extends Component {
   }
 
   eliminar = (dato)=>{
-    var opcion = window.confirm("Esta seguro que desea eliminar a "+dato.nombre+" "+ dato.sigla);
+    var opcion = window.confirm("Esta seguro que desea eliminar el ambiente "+dato.numeroambiente+" del piso "+ dato.numeropiso);
     if(opcion == true){
       var contador = 0;
       var lista = this.state.data;
@@ -85,26 +83,24 @@ class CRUDDoc extends Component {
     <>
     <Container>
     <br/>
-    <Button color = "success" onClick={()=>this.mostrarModalInsertar()}>Agregar Nueva Materia</Button>
+    <Button color = "success" onClick={()=>this.mostrarModalInsertar()}>Agregar Ambiente</Button>
     <br/><br/>
 
     <Table>
       <thead><tr>
       <th>ID</th>
-      <th>Nombre</th>
-      <th>Sigla</th>
-      <th>Carga Horaria</th>
-      <th>Horas por Semana</th>
+      <th>Numero Ambiente</th>
+      <th>Piso</th>
+      <th>Capacidad</th>
       </tr></thead>
       
       <tbody>
         {this.state.data.map((dato)=>(
           <tr>
             <td>{dato.id}</td>
-            <td>{dato.nombre}</td>
-            <td>{dato.sigla}</td>
-            <td>{dato.cargahoraria}</td>
-            <td>{dato.horassemana}</td>
+            <td>{dato.numeroambiente}</td>
+            <td>{dato.numeropiso}</td>
+            <td>{dato.capacidad}</td>
             <td>
               <Button color="success" onClick={()=>this.mostrarModalEditar(dato)}>Editar</Button>
               {" "}
@@ -128,23 +124,18 @@ class CRUDDoc extends Component {
         </FormGroup>
 
         <FormGroup>
-          <label>Nombre:</label>
-          <input className="form-control" name="nombre" type="text" onChange={this.handlerChange}/>
+          <label>Ambiente:</label>
+          <input className="form-control" name="numeroambiente" type="text" onChange={this.handlerChange}/>
         </FormGroup>
 
         <FormGroup>
-          <label>Sigla:</label>
-          <input className="form-control" name="sigla" type="text" onChange={this.handlerChange}/>
+          <label>Piso:</label>
+          <input className="form-control" name="numeropiso" type="text" onChange={this.handlerChange}/>
         </FormGroup>
 
         <FormGroup>
-          <label>Carga Horaria:</label>
-          <input className="form-control" name="cargahoraria" type="number" onChange={this.handlerChange}/>
-        </FormGroup>
-
-        <FormGroup>
-          <label>Horas por Semana:</label>
-          <input className="form-control" name="horassemana" type="number" onChange={this.handlerChange}/>
+          <label>Capacidad:</label>
+          <input className="form-control" name="capacidad" type="number" onChange={this.handlerChange}/>
         </FormGroup>
       </ModalBody>
 
@@ -168,22 +159,17 @@ class CRUDDoc extends Component {
 
         <FormGroup>
           <label>Nombre:</label>
-          <input className="form-control" name="nombre" type="text" onChange={this.handlerChange} value={this.state.form.nombre}/>
+          <input className="form-control" name="numeroambiente" type="text" onChange={this.handlerChange} value={this.state.form.numeroambiente}/>
         </FormGroup>
 
         <FormGroup>
           <label>Sigla:</label>
-          <input className="form-control" name="sigla" type="text" onChange={this.handlerChange} value={this.state.form.sigla}/>
+          <input className="form-control" name="numeropiso" type="number" onChange={this.handlerChange} value={this.state.form.numeropiso}/>
         </FormGroup>
 
         <FormGroup>
           <label>Carga Horaria:</label>
-          <input className="form-control" name="cargahoraria" type="number" onChange={this.handlerChange} value={this.state.form.cargahoraria}/>
-        </FormGroup>
-
-        <FormGroup>
-          <label>Horas por Semana:</label>
-          <input className="form-control" name="horassemana" type="number" onChange={this.handlerChange} value={this.state.form.horassemana}/>
+          <input className="form-control" name="capacidad" type="number" onChange={this.handlerChange} value={this.state.form.capacidad}/>
         </FormGroup>
       </ModalBody>
 
@@ -195,4 +181,4 @@ class CRUDDoc extends Component {
     </>)
   }
 }
-export default CRUDDoc;
+export default Ambiente;
